@@ -2,6 +2,14 @@
 
 This is a Backend API for restaurant build using Node.js, Express.js and MongoDB.
 
+## How to use
+
+1. Download and install MongoDB from [here](https://www.mongodb.com/docs/manual/installation/).
+2. Clone this repository to your computer.
+3. From the terminal, enter into this repository.
+4. Run ```npm install``` for install node modules.
+5. Run ``` node app.js``` to start the server.
+
 # API Reference
 
 ### Save new order
@@ -75,13 +83,6 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
     }
 ]
 ```
-
 **Note: The date of a order is in UTC representation.**
 
-## How to use
 
-1. Download and install MongoDB from [here](https://www.mongodb.com/docs/manual/installation/).
-2. Clone this repository to your computer.
-3. From the terminal, enter into this repository.
-4. Run ```npm install``` for install node modules.
-5. Run ``` node app.js``` to start the server.
