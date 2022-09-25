@@ -81,6 +81,6 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
 ## How to use
 
 1. Clone this repository to your computer.
-2. Download and install MongoDB.
+2. Download and install MongoDB from [here](https://www.mongodb.com/docs/manual/installation/)).
 3. Run ```npm install```
 4. run ``` node app.js```
