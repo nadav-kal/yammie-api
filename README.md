@@ -40,12 +40,12 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
         "user": "Nadav",
         "products": [
             {
-                "name": "Steak",
+                "name": "Hamburger",
                 "price": 25,
                 "_id": "633040ccae066575bea4ae9b"
             },
             {
-                "name": "Water",
+                "name": "Coca-Cola",
                 "price": 5,
                 "_id": "633040ccae066575bea4ae9c"
             }
