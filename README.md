@@ -12,21 +12,22 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
   
   ```
   {
-        user: "Nadav",
-        products: [
-            {
-                "name": "Steak",
-                "price": 25,
-            },
-            {
-                "name": "Coca-Cola",
-                "price": 5,
-            }
-        ]
-    }
-    ```
+      user: "Nadav",
+      products: [
+          {
+              "name": "Steak",
+              "price": 25,
+          },
+          {
+              "name": "Coca-Cola",
+              "price": 5,
+          }
+      ]
+  }
     
-    ### Save new order
+    ```
+  
+### Get all orders from the last day
 
 #### **```GET /lastdayorders```** ####
 
