@@ -1,80 +1,89 @@
-const server = require('../app');
 const Order = require('../models/order');
-const moment = require('moment');
+const testOrders = require('./createOrders');
+
+const { expect } = require("chai");
 const mongoose = require("mongoose");
-const request = require('supertest');
-const orders = require('./createOrders');
-const catchAsync = require('../utils/catchAsync');
-const express = require('express');
-const app = express();
-// const bodyParser = require('body-parser')
+const order = require('../models/order');
+const moment = require('moment');
 
 
 beforeEach((done) => {
-    mongoose.connect("mongodb://localhost:27017/JestDB", 
-    { useNewUrlParser: true, useUnifiedTopology: true },
-      () => done());
-  });
+  mongoose.connect("mongodb://localhost:27017/yammie-test", 
+  { useNewUrlParser: true, useUnifiedTopology: true },
+    () => done());
+});
 
-  afterEach((done) => {
-    mongoose.connection.db.dropDatabase(() => {
-      mongoose.connection.close(() => done())
+afterEach((done) => {
+  mongoose.connection.db.dropDatabase(() => {
+    mongoose.connection.close(() => done())
+  });
+});
+
+describe("Yammie API Unit Tests", function () {
+
+
+
+    describe("Save Order functionality", function () {
+
+
+      
+      it("should successfully add a order", async function () {
+
+        const user = "Nadav";
+        const products = [
+          {
+              "name": "Pizza",
+              "price": 10,
+          },
+          {
+              "name": "Chips",
+              "price": 8,
+          },
+          {
+              "name": "Water",
+              "price": 3,
+          }
+      ];
+      const order = new Order({user, products});
+
+      const returnedOrder = await order.save();
+      expect(returnedOrder.user).to.equal(user);
+      products.map((product, index) => {
+        expect(returnedOrder.products[index].name).to.equal(product.name);
+        expect(returnedOrder.products[index].price).to.equal(product.price);  
+      });
+
+      });
+
+      
+
     });
   });
 
 
-describe("save new order", () => {
+describe("check lastdayorders", function () {
 
-    test("POST /neworder", async () => {
+  it("should successfully return the first three orders that was ordered yesterday", async function () {
 
-        const order = orders.createOrder();
+    const orders = testOrders.createOrders();
+    const yesterdayStart = new Date(moment().subtract(1, 'days').startOf('day'));
+    const yesterdayEnd = new Date(moment().subtract(1, 'days').endOf('day'));
+    // console.log(orders)
+    const returnedOrders = [];
+    orders.forEach(async (order) => {
+      if(order.date >= yesterdayStart && order.date <= yesterdayEnd) {
+        returnedOrders.push(order);
+      }
 
-        await request(server).post('/neworder')
-        .type('form')
-        .send(order)
-        .set('Accept', /application\/json/)
-        .expect(200)
-        .then(async (response) => {
+    });
+    expect(returnedOrders.length).to.equal(3);
+    for(let i = 0; i < returnedOrders.length; i++) {
+      expect(returnedOrders[i].user).to.equal(orders[i].user);
+      orders[i].products.map((product, index) => {
+        expect(returnedOrders[i].products[index].name).to.equal(product.name);
+        expect(returnedOrders[i].products[index].price).to.equal(product.price);  
+      });
+    }
 
-            expect(response.body.user).toEqual(order.user);
-            expect(response.body.totalPrice).toEqual(order.totalPrice);
-            expect(response.body.date).toEqual(order.date);
-      
-            const orderFromDB = await Order.findOne({ _id: response.body._id });
-            expect(orderFromDB).toBeTruthy();
-            expect(orderFromDB.user).toBe(order.user);
-            expect(orderFromDB.totalPrice).toBe(order.totalPrice);
-            expect(orderFromDB.date).toBe(order.date);
-
-        });
-
-    })
-    
-})
-
-describe("last day orders", () => {
-
-    test("GET /lastdayorders", async () => {
-
-        const db = mongoose.connection;
-
-        // create 3 orders from yesterday and one from today
-        const ordersArr = orders.createOrders();
-        for(let i = 0; i < ordersArr.length; i++) {
-            await ordersArr[i].save();
-            await db.collection("orders").dropIndexes();
-        }
-        await request(server).get("/lastdayorders").expect(200)
-            .then((response) => {
-                expect(Array.isArray(response.body)).toBeTruthy();
-                expect(response.body.length).toEqual(3);
-                for(let i = 0; i < 3; i++) {
-                    expect(response.body[i].user).toEqual(ordersArr[i].user);
-                    expect(response.body[i].totalPrice).toEqual(ordersArr[i].totalPrice);
-                    expect(response.body[i].date).toEqual(ordersArr[i].date);
-                }
-            })
-
-        
-    })
-})
+    });
+  });
