@@ -78,7 +78,7 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
 
 **Note: The date of a order is in UTC representation.**
 
-### How to use
+## How to use
 
 1. Clone this repository to your computer.
 2. Download and install MongoDB.
