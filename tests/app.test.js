@@ -1,6 +1,5 @@
 const Order = require('../models/order');
 const testOrders = require('./createOrders');
-
 const { expect } = require("chai");
 const mongoose = require("mongoose");
 const order = require('../models/order');
@@ -21,47 +20,25 @@ afterEach((done) => {
 
 describe("Yammie API Unit Tests", function () {
 
-
-
     describe("Save Order functionality", function () {
-
-
       
       it("should successfully add a order", async function () {
 
-        const user = "Nadav";
-        const products = [
-          {
-              "name": "Pizza",
-              "price": 10,
-          },
-          {
-              "name": "Chips",
-              "price": 8,
-          },
-          {
-              "name": "Water",
-              "price": 3,
-          }
-      ];
-      const order = new Order({user, products});
-
-      const returnedOrder = await order.save();
-      expect(returnedOrder.user).to.equal(user);
-      products.map((product, index) => {
-        expect(returnedOrder.products[index].name).to.equal(product.name);
-        expect(returnedOrder.products[index].price).to.equal(product.price);  
+        const testOrder = testOrders.createOrder();
+        const user = testOrder.user;
+        const products = testOrder.products;
+        const order = new Order({user, products});
+        const returnedOrder = await order.save();
+        expect(returnedOrder.user).to.equal(user);
+        products.map((product, index) => {
+          expect(returnedOrder.products[index].name).to.equal(product.name);
+          expect(returnedOrder.products[index].price).to.equal(product.price);  
+        });
       });
-
-      });
-
-      
-
     });
-  });
 
 
-describe("check lastdayorders", function () {
+describe("Get last day orders", function () {
 
   it("should successfully return the first three orders that was ordered yesterday", async function () {
 
@@ -87,3 +64,5 @@ describe("check lastdayorders", function () {
 
     });
   });
+
+});

@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 const moment = require('moment');
 const Product = require('./product').schema;
 
-const localMoment = moment().format();
-
 const OrderSchema = new Schema({
     user: {
         type: String,

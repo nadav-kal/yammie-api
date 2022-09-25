@@ -70,28 +70,21 @@ module.exports.createOrders = () => {
 module.exports.createOrder = () => {
     
     const order = new Order({
-        "user": "Nadav",
-        "products": [
+        user: "Nadav",
+        products: [
             {
                 "name": "Pizza",
                 "price": 10,
-                "_id": "632ebcb42675289bbbbf66e9"
             },
             {
                 "name": "Chips",
                 "price": 8,
-                "_id": "632ebcb42675289bbbbf66ea"
             },
             {
                 "name": "Water",
                 "price": 3,
-                "_id": "632ebcb42675289bbbbf66eb"
             }
-        ],
-        "totalPrice": 21,
-        "date": moment().subtract(1, 'days').startOf('day'),
-        "_id": "632ebcb42675289bbbbf66e8",
-        "__v": 0
+          ]
     });
     
     return order;

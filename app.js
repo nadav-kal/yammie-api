@@ -6,8 +6,6 @@ const User = require('./models/user')
 const moment = require('moment');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-// var expect  = require('chai').expect;
-// var request = require('request');
 
 mongoose.connect('mongodb://localhost:27017/yammie', {
     useNewUrlParser: true,
@@ -22,12 +20,9 @@ db.once("open", () => {
 
 app.use(express.urlencoded({ extended: true }));
 
-
 app.get('/', (req, res) => {
     res.send("Welcome to Yammie!");
 })
-
-
 
 app.post('/neworder', catchAsync(async (req, res, next) => {
     if(!req.body.order) {
@@ -38,7 +33,6 @@ app.post('/neworder', catchAsync(async (req, res, next) => {
     await order.save();
     await db.collection("orders").dropIndexes();
     res.send(order);
-    // res.send('Your order has been placed successfully!');
 }))
 
 app.get('/lastdayorders', catchAsync(async (req, res) => {
