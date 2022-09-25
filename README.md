@@ -76,3 +76,5 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
 ]
     
  ```
+
+Note: The date of a order is in UTC representation
