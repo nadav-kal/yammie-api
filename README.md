@@ -72,25 +72,6 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
         "totalPrice": 18,
         "date": "2022-09-24T20:59:59.999Z",
         "__v": 0
-    },
-    {
-        "_id": "633041531090018164b586c6",
-        "user": "Yossi",
-        "products": [
-            {
-                "name": "Salad",
-                "price": 10,
-                "_id": "633041531090018164b586c7"
-            },
-            {
-                "name": "Orange Juice",
-                "price": 5,
-                "_id": "633041531090018164b586c8"
-            }
-        ],
-        "totalPrice": 15,
-        "date": "2022-09-24T11:53:55.496Z",
-        "__v": 0
     }
 ]
     
