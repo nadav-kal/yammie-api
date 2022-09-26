@@ -10,6 +10,9 @@ This is a Backend API for restaurant build using Node.js, Express.js and MongoDB
 4. Run ```npm install``` for install node modules.
 5. Run ``` node app.js``` to start the server.
 
+## How to run tests
+Run ```npm run test```
+
 # API Reference
 
 ### Save new order
