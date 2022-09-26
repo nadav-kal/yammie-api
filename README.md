@@ -15,6 +15,8 @@ Run ```npm run test```
 
 # API Reference
 
+**Note: The date of a order is in UTC representation.**
+
 ### Save new order
 
 #### **```POST /neworder```** ####
@@ -86,6 +88,5 @@ Run ```npm run test```
     }
 ]
 ```
-**Note: The date of a order is in UTC representation.**
 
 
