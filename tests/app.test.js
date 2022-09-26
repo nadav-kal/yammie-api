@@ -1,5 +1,5 @@
 const Order = require('../models/order');
-const testOrders = require('./createOrders');
+const testOrders = require('./TestOrders');
 const { expect } = require("chai");
 const mongoose = require("mongoose");
 const order = require('../models/order');
@@ -45,7 +45,6 @@ describe("Get last day orders", function () {
     const orders = testOrders.createOrders();
     const yesterdayStart = new Date(moment().subtract(1, 'days').startOf('day'));
     const yesterdayEnd = new Date(moment().subtract(1, 'days').endOf('day'));
-    // console.log(orders)
     const returnedOrders = [];
     orders.forEach(async (order) => {
       if(order.date >= yesterdayStart && order.date <= yesterdayEnd) {

@@ -39,7 +39,6 @@ app.get('/lastdayorders', catchAsync(async (req, res) => {
     const yesterdayStart = new Date(moment().subtract(1, 'days').startOf('day'));
     const yesterdayEnd = new Date(moment().subtract(1, 'days').endOf('day'));
     const ordersFromYesterday = await Order.find({ "date": { "$gte": yesterdayStart, "$lte": yesterdayEnd }});
-    ordersFromYesterday.forEach((order) => order.date = order.date.toString());
     res.send(ordersFromYesterday);
 }))
 
@@ -53,8 +52,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).send(message);
 })
 
-let server = app.listen(3000, () => {
+app.listen(3000, () => {
     console.log("Serving on port 3000");
 })
-
-module.exports = server;

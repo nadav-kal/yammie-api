@@ -60,7 +60,7 @@ module.exports.createOrders = () => {
                     price: 25
                 }
             ],
-            "date": moment()
+            date: moment()
         })
 
         const orders = [order1, order2, order3, order4];
@@ -73,16 +73,16 @@ module.exports.createOrder = () => {
         user: "Nadav",
         products: [
             {
-                "name": "Pizza",
-                "price": 10,
+                name: "Pizza",
+                price: 10
             },
             {
-                "name": "Chips",
-                "price": 8,
+                name: "Chips",
+                price: 8
             },
             {
-                "name": "Water",
-                "price": 3,
+                name: "Water",
+                price: 3
             }
           ]
     });
